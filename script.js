@@ -181,6 +181,7 @@ function initMarqueeScrollDirection() {
         // Update animation direction and marquee status
         animation.timeScale(currentDirection);
         marquee.setAttribute('data-marquee-status', isInverted ? 'normal' : 'inverted');
+        
       }
     });
 
@@ -203,3 +204,28 @@ function initMarqueeScrollDirection() {
 
 // Initialize Marquee with Scroll Direction
   initMarqueeScrollDirection();
+
+
+/* Hide Schedule on scroll */
+const scheduleAnim = gsap.to(".schedule-block", {
+    x: "23.1em",
+    ease: "power2.inOut",
+    duration: 1,
+    paused: true
+});
+
+ScrollTrigger.create({
+    trigger: ".schedule-container",
+    start: "top top",
+    end: "bottom bottom",
+    scrub: true,
+    onUpdate: (self) => {
+        // When scrolling down (direction is 1), play the animation forward.
+        // When scrolling up (direction is -1), reverse the animation.
+        if (self.direction === 1) {
+            scheduleAnim.play();
+        } else {
+            scheduleAnim.reverse();
+        }
+    }
+});
