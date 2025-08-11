@@ -1,6 +1,7 @@
 // Register GSAP Plugins
 gsap.registerPlugin(ScrollTrigger);
 
+
 /* Menu */
 function initProgressNavigation() {
   // Cache the parent container
@@ -293,13 +294,14 @@ function initModalBasic() {
   const modalGroup = document.querySelector('[data-modal-group-status]');
   const modals = document.querySelectorAll('[data-modal-name]');
   const modalTargets = document.querySelectorAll('[data-modal-target]');
+  const body = document.querySelector('body');
 
   // Open modal
   modalTargets.forEach((modalTarget) => {
     modalTarget.addEventListener('click', function () {
       const modalTargetName = this.getAttribute('data-modal-target');
 
-      // Close all modals
+      // Close all modals first
       modalTargets.forEach((target) => target.setAttribute('data-modal-status', 'not-active'));
       modals.forEach((modal) => modal.setAttribute('data-modal-status', 'not-active'));
 
@@ -311,30 +313,51 @@ function initModalBasic() {
       if (modalGroup) {
         modalGroup.setAttribute('data-modal-group-status', 'active');
       }
+
+      updateScrollState();
     });
   });
 
   // Close modal
   document.querySelectorAll('[data-modal-close]').forEach((closeBtn) => {
-    closeBtn.addEventListener('click', closeAllModals);
+    closeBtn.addEventListener('click', () => {
+      closeAllModals();
+      updateScrollState();
+    });
   });
 
   // Close modal on `Escape` key
   document.addEventListener('keydown', function (event) {
     if (event.key === 'Escape') {
       closeAllModals();
+      updateScrollState();
     }
   });
 
   // Function to close all modals
   function closeAllModals() {
     modalTargets.forEach((target) => target.setAttribute('data-modal-status', 'not-active'));
-    
+    modals.forEach((modal) => modal.setAttribute('data-modal-status', 'not-active'));
+
     if (modalGroup) {
       modalGroup.setAttribute('data-modal-group-status', 'not-active');
+    }
+  }
+
+  // Function to check modal state and control scroll
+  function updateScrollState() {
+    const isAnyModalActive = [...modals].some(modal => modal.getAttribute('data-modal-status') === 'active');
+
+    if (isAnyModalActive) {
+      body.classList.add('stop-scroll');
+      if (typeof lenis !== 'undefined') lenis.stop();
+    } else {
+      body.classList.remove('stop-scroll');
+      if (typeof lenis !== 'undefined') lenis.start();
     }
   }
 }
 
 // Initialize Basic Modal
 initModalBasic();
+
