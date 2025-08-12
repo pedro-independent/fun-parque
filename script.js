@@ -120,6 +120,30 @@ function initCSSMarquee() {
 // Initialize CSS Marquee
 initCSSMarquee();
 
+/* Activities scrolling cards */
+function initActivitiesAnimation() {
+
+  gsap.utils.toArray(".activities-item").forEach((item, index) => {
+    const topOffset = 10 + index * 10;
+    gsap.set(item, { top: `${topOffset}%` });
+
+    gsap.to(item, {
+      scale: 0.85,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".activities-list",
+        start: "top 10%",
+        end: "bottom 10%",
+        scrub: true,
+      }
+    });
+  });
+}
+
+initActivitiesAnimation();
+
+
+
 /* Aniv Marquee with scroll direction */
 function initMarqueeScrollDirection() {
   document.querySelectorAll('[data-marquee-scroll-direction-target]').forEach((marquee) => {
@@ -216,7 +240,6 @@ const scheduleAnim = gsap.to(".schedule-block", {
 });
 
 ScrollTrigger.create({
-    trigger: ".schedule-container",
     start: "top top",
     end: "bottom bottom",
     scrub: true,
@@ -227,6 +250,29 @@ ScrollTrigger.create({
             scheduleAnim.play();
         } else {
             scheduleAnim.reverse();
+        }
+    }
+});
+
+/* Hide Menu on scroll */
+const menuHide = gsap.to(".progress-nav", {
+    y: "-20em",
+    ease: "power2.inOut",
+    duration: 1,
+    paused: true
+});
+
+ScrollTrigger.create({
+    start: "top top",
+    end: "bottom bottom",
+    scrub: true,
+    onUpdate: (self) => {
+        // When scrolling down (direction is 1), play the animation forward.
+        // When scrolling up (direction is -1), reverse the animation.
+        if (self.direction === 1) {
+            menuHide.play();
+        } else {
+            menuHide.reverse();
         }
     }
 });
