@@ -1,5 +1,35 @@
-// Register GSAP Plugins
 gsap.registerPlugin(ScrollTrigger);
+
+function reloadOnResize(threshold = 25, delay = 300) {
+  let lastWidth = window.innerWidth;
+  let lastHeight = window.innerHeight;
+  let resizeTimer;
+
+  // Scroll to top on page load
+  window.scrollTo(0, 0);
+
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+
+    resizeTimer = setTimeout(function () {
+      const widthDiff = Math.abs(window.innerWidth - lastWidth);
+      const heightDiff = Math.abs(window.innerHeight - lastHeight);
+
+      if (widthDiff >= threshold || heightDiff >= threshold) {
+        // Ensure scroll to top before reload
+        window.onbeforeunload = function () {
+          window.scrollTo(0, 0);
+        };
+        location.reload();
+      }
+
+      lastWidth = window.innerWidth;
+      lastHeight = window.innerHeight;
+    }, delay);
+  });
+}
+
+reloadOnResize();
 
 
 /* Menu */
@@ -142,8 +172,6 @@ function initActivitiesAnimation() {
 
 initActivitiesAnimation();
 
-
-
 /* Aniv Marquee with scroll direction */
 function initMarqueeScrollDirection() {
   document.querySelectorAll('[data-marquee-scroll-direction-target]').forEach((marquee) => {
@@ -255,6 +283,7 @@ ScrollTrigger.create({
 });
 
 /* Hide Menu on scroll */
+if (window.matchMedia('(min-width: 991px)').matches) {
 const menuHide = gsap.to(".progress-nav", {
     y: "-20em",
     ease: "power2.inOut",
@@ -276,6 +305,7 @@ ScrollTrigger.create({
         }
     }
 });
+}
 
 /* Events */
   document.querySelectorAll(".events-item").forEach(item => {
