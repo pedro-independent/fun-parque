@@ -434,6 +434,39 @@ function initModalBasic() {
   }
 }
 
-// Initialize Basic Modal
 initModalBasic();
 
+/* Animate Stars on Scroll */
+function animateStarsOnScroll() {
+  const stars = document.querySelectorAll(".star-svg");
+
+  stars.forEach((star, i) => {
+    gsap.from(star, {
+      y: -500 - i * 120,
+      ease: "expo.out",
+      scrollTrigger: {
+        trigger: ".section_events",
+        start: "top 65%",
+        end: "85% 65%",
+        scrub: true,
+      }
+    });
+  });
+}
+
+animateStarsOnScroll();
+
+/* Blob scale on scroll */
+const blobs = document.querySelectorAll(".blob-wrap");
+blobs.forEach((blob) => {
+  gsap.from(blob, {
+    scale: 0.7,
+    ease: "power2.inOut",
+    scrollTrigger: {
+      trigger: blob,
+      start: "top bottom",
+      end: "bottom top",
+      scrub: true
+    }
+  });
+});
