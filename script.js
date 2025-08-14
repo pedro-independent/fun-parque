@@ -272,8 +272,6 @@ ScrollTrigger.create({
     end: "bottom bottom",
     scrub: true,
     onUpdate: (self) => {
-        // When scrolling down (direction is 1), play the animation forward.
-        // When scrolling up (direction is -1), reverse the animation.
         if (self.direction === 1) {
             scheduleAnim.play();
         } else {
@@ -281,6 +279,15 @@ ScrollTrigger.create({
         }
     }
 });
+
+// Extra ScrollTrigger to hide when hitting footer
+ScrollTrigger.create({
+    trigger: ".footer",
+    start: "top bottom", // when footer starts to enter viewport from the bottom
+    onEnter: () => gsap.set(".schedule-block", { display: "none" }),
+    onLeaveBack: () => gsap.set(".schedule-block", { display: "flex" })
+});
+
 
 /* Hide Menu on scroll */
 if (window.matchMedia('(min-width: 991px)').matches) {
