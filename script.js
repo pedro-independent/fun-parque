@@ -8,6 +8,7 @@ function reloadOnResize(threshold = 25, delay = 300) {
   // Scroll to top on page load
   window.scrollTo(0, 0);
 
+if (window.matchMedia('(min-width: 991px)').matches) {
   window.addEventListener('resize', function () {
     clearTimeout(resizeTimer);
 
@@ -31,6 +32,7 @@ function reloadOnResize(threshold = 25, delay = 300) {
 
 reloadOnResize();
 
+}
 
 /* Menu */
 function initProgressNavigation() {
