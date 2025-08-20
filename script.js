@@ -321,6 +321,7 @@ ScrollTrigger.create({
 }
 
 /* Events */
+if (window.matchMedia('(min-width: 991px)').matches) {
   document.querySelectorAll(".events-item").forEach(item => {
     const bottomContent = item.querySelector(".events-item-bottom");
 
@@ -347,7 +348,7 @@ ScrollTrigger.create({
       });
     });
   });
-
+}
 
 /* FAQ */
 function initAccordionCSS() {
