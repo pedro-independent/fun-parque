@@ -151,6 +151,7 @@ function initCSSMarquee() {
 initCSSMarquee();
 
 /* Activities scrolling cards */
+if (window.matchMedia('(min-width: 991px)').matches) {
 function initActivitiesAnimation() {
 
   gsap.utils.toArray(".activities-item").forEach((item, index) => {
@@ -171,6 +172,7 @@ function initActivitiesAnimation() {
 }
 
 initActivitiesAnimation();
+}
 
 /* Aniv Marquee with scroll direction */
 function initMarqueeScrollDirection() {
@@ -260,6 +262,7 @@ function initMarqueeScrollDirection() {
 
 
 /* Hide Schedule on scroll */
+if (window.matchMedia('(min-width: 991px)').matches) {
 const scheduleAnim = gsap.to(".schedule-block", {
     x: "23.1em",
     ease: "power2.inOut",
@@ -288,6 +291,7 @@ ScrollTrigger.create({
     onLeaveBack: () => gsap.set(".schedule-block", { display: "flex" })
 });
 
+}
 
 /* Hide Menu on scroll */
 if (window.matchMedia('(min-width: 991px)').matches) {
@@ -477,6 +481,3 @@ blobs.forEach((blob) => {
     }
   });
 });
-
-
-
