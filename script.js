@@ -58,8 +58,6 @@ function initLogoRevealLoader() {
       ease: "expo.Out"
     }, "headingStart")
 
-    .to(loader, { yPercent: 101, duration: 1 }, "hideContent")
-    .set(loader, { display: "none" });
 }
 
 initLogoRevealLoader();
