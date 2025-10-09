@@ -1,6 +1,5 @@
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
-
 /* Logo Reveal Loader */
 function initLogoRevealLoader() {
   const heroSection = document.querySelector('.section_hero');
@@ -10,10 +9,6 @@ function initLogoRevealLoader() {
   const button = document.querySelector('[data-button-hero]');
   const marquee = document.querySelector('.hero-marquee');
   const schedule = document.querySelector('.schedule-block');
-
-
-  // defensive checks
-  if (!heading) console.warn('.home-hero-heading not found');
 
   // Split text once
   const splitHeading = SplitText.create(heading, {
@@ -36,9 +31,6 @@ function initLogoRevealLoader() {
   loadTimeline
     .set(heroSection, { padding: 0 })
     .set(heroContainer, { borderRadius: 0 })
-    .set(heroVideo, { scale: 1.75 })
-    .to(progressBar, { scaleX: 1, transformOrigin: "left center" })
-    .to(progressBar, { scaleX: 0, transformOrigin: "right center", duration: 0.5 }, "<")
     .add("hideContent")
     .to(heroSection, { padding: "1.25em" })
     .to(heroContainer, { borderRadius: ".75em" }, "<")
@@ -51,14 +43,6 @@ function initLogoRevealLoader() {
       stagger: 0.1,
       ease: "expo.out"
     }, "headingStart")
-
-    .add("paraStart", "headingStart+=0.1")
-    .from(splitParagraph.lines, {
-      duration: 0.8,
-      yPercent: 110,
-      stagger: 0.05,
-      ease: "expo.out"
-    }, "paraStart")
 
     .fromTo(nav, { yPercent: -100, opacity: 0 }, {
       duration: 0.75,
