@@ -1,5 +1,86 @@
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
+
+/* Logo Reveal Loader */
+function initLogoRevealLoader() {
+  const heroSection = document.querySelector('.section_hero');
+  const heroContainer = document.querySelector('.hero-container');
+  const nav = document.querySelector('.progress-nav');
+  const heading = document.querySelector('.hero-h1');
+  const button = document.querySelector('[data-button-hero]');
+  const marquee = document.querySelector('.hero-marquee');
+  const schedule = document.querySelector('.schedule-block');
+
+
+  // defensive checks
+  if (!heading) console.warn('.home-hero-heading not found');
+
+  // Split text once
+  const splitHeading = SplitText.create(heading, {
+    type: "lines",
+    autoSplit: true,
+    mask: "lines"
+  });
+
+  const splitParagraph = SplitText.create(paragraph, {
+    type: "lines",
+    autoSplit: true,
+    mask: "lines"
+  });
+
+  // Main loader timeline
+  const loadTimeline = gsap.timeline({
+    defaults: { ease: "expo.inOut", duration: 1.5 }
+  });
+
+  loadTimeline
+    .set(heroSection, { padding: 0 })
+    .set(heroContainer, { borderRadius: 0 })
+    .set(heroVideo, { scale: 1.75 })
+    .to(progressBar, { scaleX: 1, transformOrigin: "left center" })
+    .to(progressBar, { scaleX: 0, transformOrigin: "right center", duration: 0.5 }, "<")
+    .add("hideContent")
+    .to(heroSection, { padding: "1.25em" })
+    .to(heroContainer, { borderRadius: ".75em" }, "<")
+    //.to(heroVideo, { scale: 1 }, "<")
+
+    .add("headingStart", "<+0.75")
+    .from(splitHeading.lines, {
+      duration: 0.8,
+      yPercent: 110,
+      stagger: 0.1,
+      ease: "expo.out"
+    }, "headingStart")
+
+    .add("paraStart", "headingStart+=0.1")
+    .from(splitParagraph.lines, {
+      duration: 0.8,
+      yPercent: 110,
+      stagger: 0.05,
+      ease: "expo.out"
+    }, "paraStart")
+
+    .fromTo(nav, { yPercent: -100, opacity: 0 }, {
+      duration: 0.75,
+      yPercent: 0,
+      opacity: 1,
+      ease: "expo.Out"
+    }, "headingStart")
+
+    .fromTo(button, { yPercent: 100, opacity: 0 }, {
+      duration: 0.5,
+      yPercent: 0,
+      opacity: 1,
+      ease: "expo.Out"
+    }, "headingStart")
+
+    .to(loader, { yPercent: 101, duration: 1 }, "hideContent")
+    .set(loader, { display: "none" });
+}
+
+initLogoRevealLoader();
+
+/* Reload on resize */
 function reloadOnResize(threshold = 25, delay = 300) {
   let lastWidth = window.innerWidth;
   let lastHeight = window.innerHeight;
