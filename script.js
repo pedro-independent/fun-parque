@@ -1,6 +1,7 @@
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 /* Logo Reveal Loader */
+if (window.matchMedia('(min-width: 991px)').matches) {
 function initLogoRevealLoader() {
   const heroSection = document.querySelector('.section_hero');
   const heroContainer = document.querySelector('.hero-container');
@@ -67,6 +68,7 @@ function initLogoRevealLoader() {
 }
 
 initLogoRevealLoader();
+}
 
 /* Reload on resize */
 function reloadOnResize(threshold = 25, delay = 300) {
