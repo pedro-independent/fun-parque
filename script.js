@@ -17,12 +17,6 @@ function initLogoRevealLoader() {
     mask: "lines"
   });
 
-  const splitParagraph = SplitText.create(paragraph, {
-    type: "lines",
-    autoSplit: true,
-    mask: "lines"
-  });
-
   // Main loader timeline
   const loadTimeline = gsap.timeline({
     defaults: { ease: "expo.inOut", duration: 1.5 }
