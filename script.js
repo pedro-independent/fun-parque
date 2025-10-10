@@ -19,7 +19,7 @@ function initLogoRevealLoader() {
 
   // Main loader timeline
   const loadTimeline = gsap.timeline({
-    defaults: { ease: "expo.inOut", duration: 1.5 }
+    defaults: { ease: "expo.inOut", duration: 1.75 }
   });
 
   loadTimeline
@@ -30,10 +30,10 @@ function initLogoRevealLoader() {
 
     .add("headingStart", "<+0.75")
     .from(splitHeading.lines, {
-      duration: 0.8,
+      duration: 1,
       yPercent: 110,
       stagger: 0.1,
-      ease: "expo.out"
+      ease: "power2.inOut"
     }, "headingStart")
 
     .fromTo(nav, { yPercent: -100, opacity: 0 }, {
