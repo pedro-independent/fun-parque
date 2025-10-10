@@ -1,7 +1,6 @@
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 /* Logo Reveal Loader */
-if (window.matchMedia('(min-width: 991px)').matches) {
 function initLogoRevealLoader() {
   const heroSection = document.querySelector('.section_hero');
   const heroContainer = document.querySelector('.hero-container');
@@ -18,17 +17,25 @@ function initLogoRevealLoader() {
     mask: "lines"
   });
 
+  // Check if current viewport is tablet or mobile
+  const isMobileOrTablet = window.matchMedia("(max-width: 991px)").matches;
+
   // Main loader timeline
   const loadTimeline = gsap.timeline({
     defaults: { ease: "expo.inOut", duration: 1.75 }
   });
 
-  loadTimeline
-    .set(heroSection, { padding: 0 })
-    .set(heroContainer, { borderRadius: 0 })
-    .to(heroSection, { padding: "1.25em" })
-    .to(heroContainer, { borderRadius: "0.75em" }, "<")
+  // Animate hero section and container only on desktop
+  if (!isMobileOrTablet) {
+    loadTimeline
+      .set(heroSection, { padding: 0 })
+      .set(heroContainer, { borderRadius: 0 })
+      .to(heroSection, { padding: "1.25em" })
+      .to(heroContainer, { borderRadius: "0.75em" }, "<");
+  }
 
+  // Heading and element animations
+  loadTimeline
     .add("headingStart", "<+0.75")
     .from(splitHeading.lines, {
       duration: 1,
@@ -63,12 +70,11 @@ function initLogoRevealLoader() {
       yPercent: 0,
       opacity: 1,
       ease: "expo.Out"
-    }, "headingStart")
-
+    }, "headingStart");
 }
 
 initLogoRevealLoader();
-}
+
 
 /* Reload on resize */
 function reloadOnResize(threshold = 25, delay = 300) {
