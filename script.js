@@ -52,7 +52,7 @@ function initLogoRevealLoader() {
 
     .fromTo(schedule, { xPercent: 100, opacity: 0 }, {
       duration: 0.75,
-      yPercent: 0,
+      xPercent: 0,
       opacity: 1,
       ease: "expo.Out"
     }, "headingStart")
