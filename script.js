@@ -25,10 +25,8 @@ function initLogoRevealLoader() {
   loadTimeline
     .set(heroSection, { padding: 0 })
     .set(heroContainer, { borderRadius: 0 })
-    .add("hideContent")
     .to(heroSection, { padding: "1.25em" })
-    .to(heroContainer, { borderRadius: ".75em" }, "<")
-    //.to(heroVideo, { scale: 1 }, "<")
+    .to(heroContainer, { borderRadius: "0.75em" }, "<")
 
     .add("headingStart", "<+0.75")
     .from(splitHeading.lines, {
@@ -39,6 +37,20 @@ function initLogoRevealLoader() {
     }, "headingStart")
 
     .fromTo(nav, { yPercent: -100, opacity: 0 }, {
+      duration: 0.75,
+      yPercent: 0,
+      opacity: 1,
+      ease: "expo.Out"
+    }, "headingStart")
+
+    .fromTo(marquee, { yPercent: 100, opacity: 0 }, {
+      duration: 0.75,
+      yPercent: 0,
+      opacity: 1,
+      ease: "expo.Out"
+    }, "headingStart")
+
+    .fromTo(schedule, { xPercent: 100, opacity: 0 }, {
       duration: 0.75,
       yPercent: 0,
       opacity: 1,
