@@ -30,10 +30,10 @@ function initLogoRevealLoader() {
     loadTimeline
       .set(heroSection, { padding: 0 })
       .set(heroContainer, { borderRadius: 0 })
-      //.set(schedule), { opacity: 0 }
+      .set(schedule, { opacity: 0 })
       .to(heroSection, { padding: "1.25em" })
+      .to(schedule, { opacity: 1 })
       .to(heroContainer, { borderRadius: "0.75em" }, "<");
-      //.to(schedule, { opacity: 1 });
   }
 
   // Heading and element animations
