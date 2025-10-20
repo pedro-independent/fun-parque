@@ -17,7 +17,7 @@ function initLogoRevealLoader() {
     mask: "lines"
   });
 
-  // Check if current viewport is tablet or mobile
+  // Detect mobile/tablet
   const isMobileOrTablet = window.matchMedia("(max-width: 991px)").matches;
 
   // Main loader timeline
@@ -30,9 +30,7 @@ function initLogoRevealLoader() {
     loadTimeline
       .set(heroSection, { padding: 0 })
       .set(heroContainer, { borderRadius: 0 })
-      .set(schedule, { xPercent: 0, opacity: 0 })
       .to(heroSection, { padding: "1.25em" })
-      .to(schedule, { opacity: 1 })
       .to(heroContainer, { borderRadius: "0.75em" }, "<");
   }
 
@@ -58,21 +56,33 @@ function initLogoRevealLoader() {
       yPercent: 0,
       opacity: 1,
       ease: "expo.Out"
-    }, "headingStart")
+    }, "headingStart");
 
-    .fromTo(schedule, { xPercent: 100, opacity: 0 }, {
+  // 🧠 Conditional animation for schedule
+  if (!isMobileOrTablet) {
+    // Desktop: slide in + fade
+    loadTimeline.fromTo(schedule, { xPercent: 100, opacity: 0 }, {
       duration: 0.75,
       xPercent: 0,
       opacity: 1,
       ease: "expo.Out"
-    }, "headingStart")
-
-    .fromTo(button, { yPercent: 100, opacity: 0 }, {
-      duration: 0.5,
-      yPercent: 0,
+    }, "headingStart");
+  } else {
+    // Mobile: fade only
+    loadTimeline.fromTo(schedule, { opacity: 0 }, {
+      duration: 0.75,
       opacity: 1,
       ease: "expo.Out"
     }, "headingStart");
+  }
+
+  // Button animation
+  loadTimeline.fromTo(button, { yPercent: 100, opacity: 0 }, {
+    duration: 0.5,
+    yPercent: 0,
+    opacity: 1,
+    ease: "expo.Out"
+  }, "headingStart");
 }
 
 initLogoRevealLoader();
