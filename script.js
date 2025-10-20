@@ -414,7 +414,7 @@ function hideScheduleOnScroll() {
     trigger: heroSection,
     start: "bottom+=30% bottom",
     onEnter: () => gsap.set(schedule, { display: "none" }),
-    onLeaveBack: () => gsap.set(schedule, { display: "block" })
+    onLeaveBack: () => gsap.set(schedule, { display: "flex" })
   });
 }
 
