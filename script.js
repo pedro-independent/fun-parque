@@ -58,7 +58,7 @@ function initLogoRevealLoader() {
       ease: "expo.Out"
     }, "headingStart");
 
-  // 🧠 Conditional animation for schedule
+    
   if (!isMobileOrTablet) {
     // Desktop: slide in + fade
     loadTimeline.fromTo(schedule, { xPercent: 100, opacity: 0 }, {
@@ -382,6 +382,40 @@ ScrollTrigger.create({
     onLeaveBack: () => gsap.set(".schedule-block", { display: "flex" })
 });
 
+}
+
+if (window.matchMedia('(max-width: 991px)').matches) {
+function hideScheduleOnScroll() {
+  const heroSection = document.querySelector('.section_hero');
+  const schedule = document.querySelector('.schedule-block');
+
+  if (!heroSection || !schedule) return;
+
+  // Create a ScrollTrigger that fades + hides the schedule
+  ScrollTrigger.create({
+    trigger: heroSection,
+    start: "bottom bottom",  // when bottom of hero hits bottom of viewport
+    onEnter: () => {
+      gsap.to(schedule, {
+        opacity: 0,
+        duration: 0.4,
+        ease: "power1.out",
+        onComplete: () => gsap.set(schedule, { display: "none" })
+      });
+    },
+    onLeaveBack: () => {
+      // Restore schedule when scrolling back up
+      gsap.set(schedule, { display: "block" });
+      gsap.to(schedule, {
+        opacity: 1,
+        duration: 0.4,
+        ease: "power1.out"
+      });
+    }
+  });
+}
+
+hideScheduleOnScroll();
 }
 
 /* Hide Menu on scroll */
