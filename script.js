@@ -385,37 +385,41 @@ ScrollTrigger.create({
 }
 
 if (window.matchMedia('(max-width: 991px)').matches) {
+
 function hideScheduleOnScroll() {
   const heroSection = document.querySelector('.section_hero');
   const schedule = document.querySelector('.schedule-block');
 
   if (!heroSection || !schedule) return;
 
-  // Create a ScrollTrigger that fades + hides the schedule
+  // Create the timeline
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: heroSection,
+      start: "bottom bottom",   // when hero bottom hits viewport bottom
+      end: "bottom+=30% bottom", // adjust for how far you want fade to extend
+      scrub: true,               // smooth fade tied to scroll
+      toggleActions: "play none none reverse",
+    }
+  });
+
+  // Animate opacity
+  tl.to(schedule, {
+    opacity: 0,
+    ease: "none",
+  });
+
+  // When fully faded out, hide it completely
   ScrollTrigger.create({
     trigger: heroSection,
-    start: "bottom bottom",  // when bottom of hero hits bottom of viewport
-    onEnter: () => {
-      gsap.to(schedule, {
-        opacity: 0,
-        duration: 0.4,
-        ease: "power1.out",
-        onComplete: () => gsap.set(schedule, { display: "none" })
-      });
-    },
-    onLeaveBack: () => {
-      // Restore schedule when scrolling back up
-      gsap.set(schedule, { display: "block" });
-      gsap.to(schedule, {
-        opacity: 1,
-        duration: 0.4,
-        ease: "power1.out"
-      });
-    }
+    start: "bottom+=30% bottom",
+    onEnter: () => gsap.set(schedule, { display: "none" }),
+    onLeaveBack: () => gsap.set(schedule, { display: "block" })
   });
 }
 
 hideScheduleOnScroll();
+
 }
 
 /* Hide Menu on scroll */
