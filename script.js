@@ -384,43 +384,43 @@ ScrollTrigger.create({
 
 }
 
-if (window.matchMedia('(max-width: 991px)').matches) {
+// if (window.matchMedia('(max-width: 991px)').matches) {
 
-function hideScheduleOnScroll() {
-  const heroSection = document.querySelector('.section_hero');
-  const schedule = document.querySelector('.schedule-block');
+// function hideScheduleOnScroll() {
+//   const heroSection = document.querySelector('.section_hero');
+//   const schedule = document.querySelector('.schedule-block');
 
-  if (!heroSection || !schedule) return;
+//   if (!heroSection || !schedule) return;
 
-  // Create the timeline
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: heroSection,
-      start: "bottom bottom",   // when hero bottom hits viewport bottom
-      end: "bottom+=30% bottom", // adjust for how far you want fade to extend
-      scrub: true,               // smooth fade tied to scroll
-      toggleActions: "play none none reverse",
-    }
-  });
+//   // Create the timeline
+//   const tl = gsap.timeline({
+//     scrollTrigger: {
+//       trigger: heroSection,
+//       start: "bottom bottom",   // when hero bottom hits viewport bottom
+//       end: "bottom+=30% bottom", // adjust for how far you want fade to extend
+//       scrub: true,               // smooth fade tied to scroll
+//       toggleActions: "play none none reverse",
+//     }
+//   });
 
-  // Animate opacity
-  tl.to(schedule, {
-    opacity: 0,
-    ease: "none",
-  });
+//   // Animate opacity
+//   tl.to(schedule, {
+//     opacity: 0,
+//     ease: "none",
+//   });
 
-  // When fully faded out, hide it completely
-  ScrollTrigger.create({
-    trigger: heroSection,
-    start: "bottom+=30% bottom",
-    onEnter: () => gsap.set(schedule, { display: "none" }),
-    onLeaveBack: () => gsap.set(schedule, { display: "flex" })
-  });
-}
+//   // When fully faded out, hide it completely
+//   ScrollTrigger.create({
+//     trigger: heroSection,
+//     start: "bottom+=30% bottom",
+//     onEnter: () => gsap.set(schedule, { display: "none" }),
+//     onLeaveBack: () => gsap.set(schedule, { display: "flex" })
+//   });
+// }
 
-hideScheduleOnScroll();
+// hideScheduleOnScroll();
 
-}
+// }
 
 /* Hide Menu on scroll */
 if (window.matchMedia('(min-width: 991px)').matches) {
