@@ -763,16 +763,17 @@ function initSwiperSlider() {
     const swiper = new Swiper(swiperSliderWrap, {
       slidesPerView: 1.25,
       speed: 600,
-      mousewheel: true,
+      mousewheel: false,
       grabCursor: true,
+      loop: true,
       breakpoints: {
         // when window width is >= 480px
         480: {
-          slidesPerView: 1.8,
+          slidesPerView: 1.5,
         },
         // when window width is >= 992px
         992: {
-          slidesPerView: 3.5,
+          slidesPerView: 2.25,
         }
       },
       navigation: {
