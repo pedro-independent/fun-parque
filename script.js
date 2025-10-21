@@ -763,13 +763,12 @@ function initSwiperSlider() {
     const swiper = new Swiper(swiperSliderWrap, {
       slidesPerView: 1.25,
       speed: 600,
-      autoHeight: true,
       mousewheel: false,
       grabCursor: true,
       loop: true,
-      autoplay: {
-        delay: 3500,
-      },
+      // autoplay: {
+      //   delay: 3500,
+      // },
       breakpoints: {
         // when window width is >= 480px
         480: {
