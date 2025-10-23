@@ -765,7 +765,7 @@ function initSwiperSlider() {
       speed: 600,
       mousewheel: false,
       grabCursor: true,
-      //loop: true,
+      loop: true,
       autoplay: {
         delay: 3500,
       },
