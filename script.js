@@ -776,7 +776,7 @@ function initSwiperSlider() {
         },
         // when window width is >= 992px
         992: {
-          slidesPerView: 2.25,
+          slidesPerView: 1.75,
         }
       },
       navigation: {
