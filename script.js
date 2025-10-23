@@ -767,7 +767,7 @@ function initSwiperSlider() {
       grabCursor: true,
       loop: true,
       autoplay: {
-        delay: 3500,
+        delay: 4500,
       },
       breakpoints: {
         // when window width is >= 480px
